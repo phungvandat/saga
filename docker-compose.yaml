@@ -1,0 +1,15 @@
+version: "3.6"
+services:
+  nats:
+    image: nats-streaming:0.22.0
+    restart: always
+    container_name: nats_ctn
+    ports:
+      - 4222:4222
+      - 8222:8222
+      - 6222:6222
+    volumes:
+      - ./data/msg:/data/msg
+      - ./data/streaming-data:/streaming-data
+      - ./nats-streaming.conf:/conf/nats-streaming.conf
+    entrypoint: "/nats-streaming-server -c /conf/nats-streaming.conf"
